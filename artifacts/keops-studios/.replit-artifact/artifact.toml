@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Keops Studios"
+version = "1.0.0"
+id = "artifacts/keops-studios"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18315
+
+[services.development]
+run = "pnpm --filter @workspace/keops-studios run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/keops-studios", "run", "build" ]
+publicDir = "artifacts/keops-studios/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18315"
+BASE_PATH = "/"

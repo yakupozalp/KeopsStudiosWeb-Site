@@ -1,0 +1,14 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "q2C42aDgvzTqOu2_BWSa5"
+uri = "file://artifacts/keops-studios/public/game-1.png"
+type = "image"
+title = "Sci-fi space shooter cover"
+
+[[generated]]
+id = "eWUefbx87SByY8tgZa6e4"
+uri = "file://artifacts/keops-studios/public/game-2.png"
+type = "image"
+title = "Cyberpunk puzzle game cover"

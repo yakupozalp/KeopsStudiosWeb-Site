@@ -3,20 +3,27 @@ info:
   # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Keops Studios API specification
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: games
+    description: Game management
+  - name: team
+    description: Team member management
+  - name: site
+    description: Site content management
+  - name: admin
+    description: Admin authentication
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +31,254 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /games:
+    get:
+      operationId: listGames
+      tags: [games]
+      summary: List all games
+      responses:
+        "200":
+          description: List of games
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Game"
+    post:
+      operationId: createGame
+      tags: [games]
+      summary: Create a new game (admin)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GameInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Game"
+
+  /games/{id}:
+    get:
+      operationId: getGame
+      tags: [games]
+      summary: Get a single game
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Game
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Game"
+        "404":
+          description: Not found
+    patch:
+      operationId: updateGame
+      tags: [games]
+      summary: Update a game (admin)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GameUpdate"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Game"
+    delete:
+      operationId: deleteGame
+      tags: [games]
+      summary: Delete a game (admin)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /team:
+    get:
+      operationId: listTeamMembers
+      tags: [team]
+      summary: List all team members
+      responses:
+        "200":
+          description: List of team members
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TeamMember"
+    post:
+      operationId: createTeamMember
+      tags: [team]
+      summary: Create a team member (admin)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TeamMemberInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeamMember"
+
+  /team/{id}:
+    patch:
+      operationId: updateTeamMember
+      tags: [team]
+      summary: Update a team member (admin)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TeamMemberUpdate"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeamMember"
+    delete:
+      operationId: deleteTeamMember
+      tags: [team]
+      summary: Delete a team member (admin)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /site-content:
+    get:
+      operationId: getSiteContent
+      tags: [site]
+      summary: Get all site content (hero text, about, social links, etc.)
+      responses:
+        "200":
+          description: Site content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SiteContent"
+    patch:
+      operationId: updateSiteContent
+      tags: [site]
+      summary: Update site content (admin)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SiteContentUpdate"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SiteContent"
+
+  /admin/login:
+    post:
+      operationId: adminLogin
+      tags: [admin]
+      summary: Admin login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminCredentials"
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminSession"
+        "401":
+          description: Invalid credentials
+
+  /admin/logout:
+    post:
+      operationId: adminLogout
+      tags: [admin]
+      summary: Admin logout
+      responses:
+        "200":
+          description: Logged out
+
+  /admin/me:
+    get:
+      operationId: getAdminMe
+      tags: [admin]
+      summary: Get current admin session
+      responses:
+        "200":
+          description: Admin session
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminSession"
+        "401":
+          description: Not authenticated
+
+  /stats:
+    get:
+      operationId: getStats
+      tags: [site]
+      summary: Get studio stats (game count, team size, years active)
+      responses:
+        "200":
+          description: Studio stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StudioStats"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +289,218 @@ components:
       required:
         - status
 
+    Game:
+      type: object
+      required: [id, title, platform, status, order]
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: ["string", "null"]
+        platform:
+          type: string
+          description: "e.g. Mobile, PC, Mobile & PC"
+        genre:
+          type: ["string", "null"]
+        status:
+          type: string
+          description: "e.g. In Development, Released, Coming Soon"
+        imageUrl:
+          type: ["string", "null"]
+        storeUrl:
+          type: ["string", "null"]
+        order:
+          type: integer
+        createdAt:
+          type: string
+
+    GameInput:
+      type: object
+      required: [title, platform, status]
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        platform:
+          type: string
+        genre:
+          type: string
+        status:
+          type: string
+        imageUrl:
+          type: string
+        storeUrl:
+          type: string
+        order:
+          type: integer
+
+    GameUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        platform:
+          type: string
+        genre:
+          type: string
+        status:
+          type: string
+        imageUrl:
+          type: string
+        storeUrl:
+          type: string
+        order:
+          type: integer
+
+    TeamMember:
+      type: object
+      required: [id, name, role, order]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        role:
+          type: string
+        bio:
+          type: ["string", "null"]
+        imageUrl:
+          type: ["string", "null"]
+        linkedinUrl:
+          type: ["string", "null"]
+        twitterUrl:
+          type: ["string", "null"]
+        order:
+          type: integer
+
+    TeamMemberInput:
+      type: object
+      required: [name, role]
+      properties:
+        name:
+          type: string
+        role:
+          type: string
+        bio:
+          type: string
+        imageUrl:
+          type: string
+        linkedinUrl:
+          type: string
+        twitterUrl:
+          type: string
+        order:
+          type: integer
+
+    TeamMemberUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        role:
+          type: string
+        bio:
+          type: string
+        imageUrl:
+          type: string
+        linkedinUrl:
+          type: string
+        twitterUrl:
+          type: string
+        order:
+          type: integer
+
+    SiteContent:
+      type: object
+      required: [id]
+      properties:
+        id:
+          type: integer
+        heroTitleTr:
+          type: ["string", "null"]
+        heroTitleEn:
+          type: ["string", "null"]
+        heroSubtitleTr:
+          type: ["string", "null"]
+        heroSubtitleEn:
+          type: ["string", "null"]
+        aboutTr:
+          type: ["string", "null"]
+        aboutEn:
+          type: ["string", "null"]
+        instagramUrl:
+          type: ["string", "null"]
+        twitterUrl:
+          type: ["string", "null"]
+        linkedinUrl:
+          type: ["string", "null"]
+        youtubeUrl:
+          type: ["string", "null"]
+        discordUrl:
+          type: ["string", "null"]
+        email:
+          type: ["string", "null"]
+
+    SiteContentUpdate:
+      type: object
+      properties:
+        heroTitleTr:
+          type: string
+        heroTitleEn:
+          type: string
+        heroSubtitleTr:
+          type: string
+        heroSubtitleEn:
+          type: string
+        aboutTr:
+          type: string
+        aboutEn:
+          type: string
+        instagramUrl:
+          type: string
+        twitterUrl:
+          type: string
+        linkedinUrl:
+          type: string
+        youtubeUrl:
+          type: string
+        discordUrl:
+          type: string
+        email:
+          type: string
+
+    AdminCredentials:
+      type: object
+      required: [password]
+      properties:
+        password:
+          type: string
+
+    AdminSession:
+      type: object
+      required: [authenticated]
+      properties:
+        authenticated:
+          type: boolean
+        username:
+          type: ["string", "null"]
+
+    StudioStats:
+      type: object
+      required: [gameCount, teamSize, yearsActive, platforms]
+      properties:
+        gameCount:
+          type: integer
+        teamSize:
+          type: integer
+        yearsActive:
+          type: integer
+        platforms:
+          type: array
+          items:
+            type: string
