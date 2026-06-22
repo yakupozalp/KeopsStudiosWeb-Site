@@ -9,10 +9,9 @@ export function Logo({ className = "h-8" }: LogoProps) {
 
   return (
     <img
-      src="/logo-white.png"
+      src={theme === "dark" ? "/logo-dark-mode.png" : "/logo-light-mode.png"}
       alt="Keops Studios"
       className={className}
-      style={theme === "light" ? { filter: "invert(1)" } : undefined}
     />
   );
 }
