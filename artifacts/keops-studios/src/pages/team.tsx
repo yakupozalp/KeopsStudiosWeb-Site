@@ -29,8 +29,8 @@ export default function Team() {
           </div>
         ) : sortedTeam.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {sortedTeam.map((member) => (
-              <TeamCard key={member.id} member={member} />
+            {sortedTeam.map((member, i) => (
+              <TeamCard key={member.id} member={member} index={i} />
             ))}
           </div>
         ) : (

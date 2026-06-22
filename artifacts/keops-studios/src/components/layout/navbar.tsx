@@ -17,7 +17,7 @@ export function Navbar() {
   ];
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-sm border-b border-border/40">
+    <header className="fixed top-0 w-full z-50 bg-background/85 backdrop-blur-md border-b border-border/50 shadow-sm">
       <div className="container mx-auto px-4 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-4 group">
           <Logo className="h-10 w-auto group-hover:scale-105 transition-transform duration-300" />
