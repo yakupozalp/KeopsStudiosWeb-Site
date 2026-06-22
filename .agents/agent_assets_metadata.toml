@@ -12,3 +12,9 @@ id = "eWUefbx87SByY8tgZa6e4"
 uri = "file://artifacts/keops-studios/public/game-2.png"
 type = "image"
 title = "Cyberpunk puzzle game cover"
+
+[[generated]]
+id = "xPmHIHNXpoBvyUpPqiJtQ"
+uri = "file://artifacts/keops-studios/public/placeholder-bg.png"
+type = "image"
+title = "dark futuristic sci-fi landscape"
