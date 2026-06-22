@@ -1,6 +1,7 @@
 import { TeamMember } from "@workspace/api-client-react";
 import { Linkedin, Twitter } from "lucide-react";
 import { motion } from "framer-motion";
+import { useI18n } from "@/lib/i18n-provider";
 
 interface TeamCardProps {
   member: TeamMember;
@@ -21,6 +22,12 @@ function getInitials(name: string) {
 export function TeamCard({ member, index = 0 }: TeamCardProps) {
   const theme = THEMES[index % THEMES.length];
   const hasImage = !!member.imageUrl?.trim();
+  const { t } = useI18n();
+
+  const displayRole = t(member.roleTr || member.role, member.roleEn || member.role);
+  const displayBio = member.bioTr || member.bioEn
+    ? t(member.bioTr || member.bio || "", member.bioEn || member.bio || "")
+    : member.bio;
 
   return (
     <motion.div
@@ -60,10 +67,10 @@ export function TeamCard({ member, index = 0 }: TeamCardProps) {
       <div className="p-6 flex-1 flex flex-col items-center text-center gap-2">
         <h4 className="text-lg font-display font-black tracking-tight">{member.name}</h4>
         <div className="text-xs font-mono uppercase tracking-widest font-bold" style={{ color: theme.color }}>
-          {member.role}
+          {displayRole}
         </div>
-        {member.bio && (
-          <p className="text-sm text-muted-foreground line-clamp-3 leading-relaxed mt-1">{member.bio}</p>
+        {displayBio && (
+          <p className="text-sm text-muted-foreground line-clamp-3 leading-relaxed mt-1">{displayBio}</p>
         )}
 
         {(member.twitterUrl || member.linkedinUrl) && (

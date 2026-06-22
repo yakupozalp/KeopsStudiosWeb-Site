@@ -179,7 +179,7 @@ function GamesManager() {
               <Plus className="h-4 w-4" /> Yeni Ekle
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-2xl border-border bg-card">
+          <DialogContent className="max-w-2xl border-border bg-card max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle className="font-display uppercase tracking-widest">{editingId ? "Oyunu Düzenle" : "Yeni Oyun Ekle"}</DialogTitle>
             </DialogHeader>
@@ -261,12 +261,22 @@ function TeamManager() {
   const [editingId, setEditingId] = useState<number | null>(null);
   
   const [formData, setFormData] = useState({
-    name: "", role: "", bio: "", imageUrl: "", linkedinUrl: "", twitterUrl: "", order: 0
+    name: "",
+    role: "",
+    roleTr: "",
+    roleEn: "",
+    bio: "",
+    bioTr: "",
+    bioEn: "",
+    imageUrl: "",
+    linkedinUrl: "",
+    twitterUrl: "",
+    order: 0
   });
 
   const handleOpenNew = () => {
     setEditingId(null);
-    setFormData({ name: "", role: "", bio: "", imageUrl: "", linkedinUrl: "", twitterUrl: "", order: 0 });
+    setFormData({ name: "", role: "", roleTr: "", roleEn: "", bio: "", bioTr: "", bioEn: "", imageUrl: "", linkedinUrl: "", twitterUrl: "", order: 0 });
     setIsOpen(true);
   };
 
@@ -275,7 +285,11 @@ function TeamManager() {
     setFormData({
       name: member.name || "",
       role: member.role || "",
+      roleTr: member.roleTr || "",
+      roleEn: member.roleEn || "",
       bio: member.bio || "",
+      bioTr: member.bioTr || "",
+      bioEn: member.bioEn || "",
       imageUrl: member.imageUrl || "",
       linkedinUrl: member.linkedinUrl || "",
       twitterUrl: member.twitterUrl || "",
@@ -326,27 +340,27 @@ function TeamManager() {
               <Plus className="h-4 w-4" /> Yeni Ekle
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-2xl border-border bg-card">
+          <DialogContent className="max-w-3xl border-border bg-card max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle className="font-display uppercase tracking-widest">{editingId ? "Üyeyi Düzenle" : "Yeni Üye Ekle"}</DialogTitle>
             </DialogHeader>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label>İsim</Label>
                   <Input value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} required />
                 </div>
                 <div className="space-y-2">
-                  <Label>Rol</Label>
-                  <Input value={formData.role} onChange={e => setFormData({...formData, role: e.target.value})} required />
+                  <Label>Sıra (Order)</Label>
+                  <Input type="number" value={formData.order} onChange={e => setFormData({...formData, order: parseInt(e.target.value) || 0})} required />
                 </div>
                 <div className="space-y-2">
                   <Label>Görsel URL</Label>
                   <Input value={formData.imageUrl} onChange={e => setFormData({...formData, imageUrl: e.target.value})} />
                 </div>
                 <div className="space-y-2">
-                  <Label>Sıra (Order)</Label>
-                  <Input type="number" value={formData.order} onChange={e => setFormData({...formData, order: parseInt(e.target.value) || 0})} required />
+                  <Label>Varsayılan Rol (Fallback)</Label>
+                  <Input value={formData.role} onChange={e => setFormData({...formData, role: e.target.value})} required placeholder="Örn: Developer" />
                 </div>
                 <div className="space-y-2">
                   <Label>LinkedIn URL</Label>
@@ -357,10 +371,32 @@ function TeamManager() {
                   <Input value={formData.twitterUrl} onChange={e => setFormData({...formData, twitterUrl: e.target.value})} />
                 </div>
               </div>
-              <div className="space-y-2">
-                <Label>Biyografi</Label>
-                <Textarea value={formData.bio} onChange={e => setFormData({...formData, bio: e.target.value})} rows={3} />
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 border border-border/50 p-4 rounded-md bg-muted/20">
+                <div className="space-y-4">
+                  <h4 className="font-mono text-xs uppercase tracking-widest text-primary font-bold border-b border-border pb-2">🇹🇷 Türkçe</h4>
+                  <div className="space-y-2">
+                    <Label>Rol (TR)</Label>
+                    <Input value={formData.roleTr} onChange={e => setFormData({...formData, roleTr: e.target.value})} placeholder="Örn: Yazılım Geliştirici" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Biyografi (TR)</Label>
+                    <Textarea value={formData.bioTr} onChange={e => setFormData({...formData, bioTr: e.target.value})} rows={4} placeholder="Türkçe biyografi..." />
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <h4 className="font-mono text-xs uppercase tracking-widest text-secondary font-bold border-b border-border pb-2">🇬🇧 English</h4>
+                  <div className="space-y-2">
+                    <Label>Role (EN)</Label>
+                    <Input value={formData.roleEn} onChange={e => setFormData({...formData, roleEn: e.target.value})} placeholder="e.g. Software Developer" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Bio (EN)</Label>
+                    <Textarea value={formData.bioEn} onChange={e => setFormData({...formData, bioEn: e.target.value})} rows={4} placeholder="English bio..." />
+                  </div>
+                </div>
               </div>
+
               <Button type="submit" className="w-full font-mono tracking-widest uppercase" disabled={createTeam.isPending || updateTeam.isPending}>
                 Kaydet
               </Button>
@@ -374,7 +410,8 @@ function TeamManager() {
           <div key={member.id} className={`flex items-center justify-between p-4 ${i !== 0 ? 'border-t border-border' : ''} bg-card hover:bg-muted/50 transition-colors`}>
             <div>
               <div className="font-bold">{member.name}</div>
-              <div className="text-xs text-primary font-mono uppercase tracking-widest">{member.role}</div>
+              <div className="text-xs text-primary font-mono uppercase tracking-widest">{member.roleTr || member.role}</div>
+              {member.roleEn && <div className="text-xs text-secondary font-mono uppercase tracking-widest">{member.roleEn}</div>}
             </div>
             <div className="flex gap-2">
               <Button variant="ghost" size="icon" onClick={() => handleOpenEdit(member)} className="hover:bg-primary/20 hover:text-primary">
@@ -430,7 +467,7 @@ function ContentManager() {
     <form onSubmit={handleSubmit} className="space-y-8">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="space-y-6 border border-border p-6 bg-card">
-          <h3 className="font-display font-bold uppercase tracking-widest text-lg border-b border-border pb-4">Türkçe İçerik</h3>
+          <h3 className="font-display font-bold uppercase tracking-widest text-lg border-b border-border pb-4">🇹🇷 Türkçe İçerik</h3>
           <div className="space-y-4">
             <div className="space-y-2">
               <Label>Hero Başlık (TR)</Label>
@@ -448,7 +485,7 @@ function ContentManager() {
         </div>
 
         <div className="space-y-6 border border-border p-6 bg-card">
-          <h3 className="font-display font-bold uppercase tracking-widest text-lg border-b border-border pb-4">English Content</h3>
+          <h3 className="font-display font-bold uppercase tracking-widest text-lg border-b border-border pb-4">🇬🇧 English Content</h3>
           <div className="space-y-4">
             <div className="space-y-2">
               <Label>Hero Title (EN)</Label>
@@ -470,28 +507,28 @@ function ContentManager() {
         <h3 className="font-display font-bold uppercase tracking-widest text-lg border-b border-border pb-4">Sosyal Medya & İletişim</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label>Twitter</Label>
-            <Input value={formData.twitterUrl} onChange={e => setFormData({...formData, twitterUrl: e.target.value})} />
+            <Label>Twitter / X</Label>
+            <Input value={formData.twitterUrl} onChange={e => setFormData({...formData, twitterUrl: e.target.value})} placeholder="https://twitter.com/..." />
           </div>
           <div className="space-y-2">
             <Label>Instagram</Label>
-            <Input value={formData.instagramUrl} onChange={e => setFormData({...formData, instagramUrl: e.target.value})} />
+            <Input value={formData.instagramUrl} onChange={e => setFormData({...formData, instagramUrl: e.target.value})} placeholder="https://instagram.com/..." />
           </div>
           <div className="space-y-2">
             <Label>LinkedIn</Label>
-            <Input value={formData.linkedinUrl} onChange={e => setFormData({...formData, linkedinUrl: e.target.value})} />
+            <Input value={formData.linkedinUrl} onChange={e => setFormData({...formData, linkedinUrl: e.target.value})} placeholder="https://linkedin.com/..." />
           </div>
           <div className="space-y-2">
             <Label>YouTube</Label>
-            <Input value={formData.youtubeUrl} onChange={e => setFormData({...formData, youtubeUrl: e.target.value})} />
+            <Input value={formData.youtubeUrl} onChange={e => setFormData({...formData, youtubeUrl: e.target.value})} placeholder="https://youtube.com/..." />
           </div>
           <div className="space-y-2">
             <Label>Discord</Label>
-            <Input value={formData.discordUrl} onChange={e => setFormData({...formData, discordUrl: e.target.value})} />
+            <Input value={formData.discordUrl} onChange={e => setFormData({...formData, discordUrl: e.target.value})} placeholder="https://discord.gg/..." />
           </div>
           <div className="space-y-2">
             <Label>Email</Label>
-            <Input type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} />
+            <Input type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} placeholder="iletisim@keops.com" />
           </div>
         </div>
       </div>

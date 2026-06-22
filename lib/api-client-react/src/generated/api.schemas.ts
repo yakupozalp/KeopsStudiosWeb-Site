@@ -55,7 +55,15 @@ export interface TeamMember {
   name: string;
   role: string;
   /** @nullable */
+  roleTr?: string | null;
+  /** @nullable */
+  roleEn?: string | null;
+  /** @nullable */
   bio?: string | null;
+  /** @nullable */
+  bioTr?: string | null;
+  /** @nullable */
+  bioEn?: string | null;
   /** @nullable */
   imageUrl?: string | null;
   /** @nullable */
@@ -68,7 +76,11 @@ export interface TeamMember {
 export interface TeamMemberInput {
   name: string;
   role: string;
+  roleTr?: string;
+  roleEn?: string;
   bio?: string;
+  bioTr?: string;
+  bioEn?: string;
   imageUrl?: string;
   linkedinUrl?: string;
   twitterUrl?: string;
@@ -78,7 +90,11 @@ export interface TeamMemberInput {
 export interface TeamMemberUpdate {
   name?: string;
   role?: string;
+  roleTr?: string;
+  roleEn?: string;
   bio?: string;
+  bioTr?: string;
+  bioEn?: string;
   imageUrl?: string;
   linkedinUrl?: string;
   twitterUrl?: string;

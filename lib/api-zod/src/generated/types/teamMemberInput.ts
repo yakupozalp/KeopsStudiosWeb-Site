@@ -9,7 +9,11 @@
 export interface TeamMemberInput {
   name: string;
   role: string;
+  roleTr?: string;
+  roleEn?: string;
   bio?: string;
+  bioTr?: string;
+  bioEn?: string;
   imageUrl?: string;
   linkedinUrl?: string;
   twitterUrl?: string;

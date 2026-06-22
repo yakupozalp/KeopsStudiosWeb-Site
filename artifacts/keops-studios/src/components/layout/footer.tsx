@@ -81,9 +81,6 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-6">
             <span className="text-sm text-muted-foreground font-mono">Made with passion</span>
-            <Link href="/admin" className="text-xs font-mono uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors">
-              Admin
-            </Link>
           </div>
         </div>
       </div>

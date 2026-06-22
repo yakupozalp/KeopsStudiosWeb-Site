@@ -367,7 +367,15 @@ components:
           type: string
         role:
           type: string
+        roleTr:
+          type: ["string", "null"]
+        roleEn:
+          type: ["string", "null"]
         bio:
+          type: ["string", "null"]
+        bioTr:
+          type: ["string", "null"]
+        bioEn:
           type: ["string", "null"]
         imageUrl:
           type: ["string", "null"]
@@ -386,7 +394,15 @@ components:
           type: string
         role:
           type: string
+        roleTr:
+          type: string
+        roleEn:
+          type: string
         bio:
+          type: string
+        bioTr:
+          type: string
+        bioEn:
           type: string
         imageUrl:
           type: string
@@ -404,7 +420,15 @@ components:
           type: string
         role:
           type: string
+        roleTr:
+          type: string
+        roleEn:
+          type: string
         bio:
+          type: string
+        bioTr:
+          type: string
+        bioEn:
           type: string
         imageUrl:
           type: string
