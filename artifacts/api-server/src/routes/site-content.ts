@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { db, siteContentTable, updateSiteContentSchema } from "@workspace/db";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 
 const router = Router();
 
@@ -33,6 +33,18 @@ router.patch("/site-content", async (req, res) => {
   } catch (err) {
     req.log.error({ err }, "Failed to update site content");
     res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+router.post("/site-content/track-visit", async (req, res) => {
+  try {
+    const content = await ensureSiteContent();
+    await db.update(siteContentTable)
+      .set({ totalVisits: sql`${siteContentTable.totalVisits} + 1` })
+      .where(eq(siteContentTable.id, content.id));
+    res.json({ ok: true });
+  } catch {
+    res.json({ ok: false });
   }
 });
 

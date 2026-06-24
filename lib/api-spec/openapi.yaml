@@ -469,6 +469,20 @@ components:
           type: ["string", "null"]
         email:
           type: ["string", "null"]
+        logoUrl:
+          type: ["string", "null"]
+        faviconUrl:
+          type: ["string", "null"]
+        metaTitleTr:
+          type: ["string", "null"]
+        metaTitleEn:
+          type: ["string", "null"]
+        metaDescriptionTr:
+          type: ["string", "null"]
+        metaDescriptionEn:
+          type: ["string", "null"]
+        totalVisits:
+          type: ["integer", "null"]
 
     SiteContentUpdate:
       type: object
@@ -496,6 +510,18 @@ components:
         discordUrl:
           type: string
         email:
+          type: string
+        logoUrl:
+          type: string
+        faviconUrl:
+          type: string
+        metaTitleTr:
+          type: string
+        metaTitleEn:
+          type: string
+        metaDescriptionTr:
+          type: string
+        metaDescriptionEn:
           type: string
 
     AdminCredentials:

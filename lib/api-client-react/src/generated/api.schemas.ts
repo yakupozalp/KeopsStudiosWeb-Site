@@ -127,6 +127,20 @@ export interface SiteContent {
   discordUrl?: string | null;
   /** @nullable */
   email?: string | null;
+  /** @nullable */
+  logoUrl?: string | null;
+  /** @nullable */
+  faviconUrl?: string | null;
+  /** @nullable */
+  metaTitleTr?: string | null;
+  /** @nullable */
+  metaTitleEn?: string | null;
+  /** @nullable */
+  metaDescriptionTr?: string | null;
+  /** @nullable */
+  metaDescriptionEn?: string | null;
+  /** @nullable */
+  totalVisits?: number | null;
 }
 
 export interface SiteContentUpdate {
@@ -142,6 +156,12 @@ export interface SiteContentUpdate {
   youtubeUrl?: string;
   discordUrl?: string;
   email?: string;
+  logoUrl?: string;
+  faviconUrl?: string;
+  metaTitleTr?: string;
+  metaTitleEn?: string;
+  metaDescriptionTr?: string;
+  metaDescriptionEn?: string;
 }
 
 export interface AdminCredentials {

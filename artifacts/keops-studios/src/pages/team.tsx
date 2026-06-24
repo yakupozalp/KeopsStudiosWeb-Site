@@ -29,7 +29,7 @@ export default function Team() {
             <h2 className="text-sm font-mono text-secondary tracking-[0.4em] mb-6 uppercase font-bold relative">
               {t("Geliştiriciler", "Creators")}
             </h2>
-            <h3 className="text-5xl md:text-8xl font-display font-black uppercase tracking-tighter text-white relative">
+            <h3 className="text-5xl md:text-8xl font-display font-black uppercase tracking-tighter text-foreground relative">
               {t("Ekip", "Team")}
             </h3>
           </motion.div>

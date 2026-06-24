@@ -209,7 +209,14 @@ export const GetSiteContentResponse = zod.object({
   "linkedinUrl": zod.string().nullish(),
   "youtubeUrl": zod.string().nullish(),
   "discordUrl": zod.string().nullish(),
-  "email": zod.string().nullish()
+  "email": zod.string().nullish(),
+  "logoUrl": zod.string().nullish(),
+  "faviconUrl": zod.string().nullish(),
+  "metaTitleTr": zod.string().nullish(),
+  "metaTitleEn": zod.string().nullish(),
+  "metaDescriptionTr": zod.string().nullish(),
+  "metaDescriptionEn": zod.string().nullish(),
+  "totalVisits": zod.number().nullish()
 })
 
 
@@ -228,7 +235,13 @@ export const UpdateSiteContentBody = zod.object({
   "linkedinUrl": zod.string().optional(),
   "youtubeUrl": zod.string().optional(),
   "discordUrl": zod.string().optional(),
-  "email": zod.string().optional()
+  "email": zod.string().optional(),
+  "logoUrl": zod.string().optional(),
+  "faviconUrl": zod.string().optional(),
+  "metaTitleTr": zod.string().optional(),
+  "metaTitleEn": zod.string().optional(),
+  "metaDescriptionTr": zod.string().optional(),
+  "metaDescriptionEn": zod.string().optional()
 })
 
 export const UpdateSiteContentResponse = zod.object({
@@ -244,7 +257,14 @@ export const UpdateSiteContentResponse = zod.object({
   "linkedinUrl": zod.string().nullish(),
   "youtubeUrl": zod.string().nullish(),
   "discordUrl": zod.string().nullish(),
-  "email": zod.string().nullish()
+  "email": zod.string().nullish(),
+  "logoUrl": zod.string().nullish(),
+  "faviconUrl": zod.string().nullish(),
+  "metaTitleTr": zod.string().nullish(),
+  "metaTitleEn": zod.string().nullish(),
+  "metaDescriptionTr": zod.string().nullish(),
+  "metaDescriptionEn": zod.string().nullish(),
+  "totalVisits": zod.number().nullish()
 })
 
 

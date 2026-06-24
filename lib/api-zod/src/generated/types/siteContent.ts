@@ -32,4 +32,18 @@ export interface SiteContent {
   discordUrl?: string | null;
   /** @nullable */
   email?: string | null;
+  /** @nullable */
+  logoUrl?: string | null;
+  /** @nullable */
+  faviconUrl?: string | null;
+  /** @nullable */
+  metaTitleTr?: string | null;
+  /** @nullable */
+  metaTitleEn?: string | null;
+  /** @nullable */
+  metaDescriptionTr?: string | null;
+  /** @nullable */
+  metaDescriptionEn?: string | null;
+  /** @nullable */
+  totalVisits?: number | null;
 }

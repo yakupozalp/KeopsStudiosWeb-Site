@@ -19,4 +19,10 @@ export interface SiteContentUpdate {
   youtubeUrl?: string;
   discordUrl?: string;
   email?: string;
+  logoUrl?: string;
+  faviconUrl?: string;
+  metaTitleTr?: string;
+  metaTitleEn?: string;
+  metaDescriptionTr?: string;
+  metaDescriptionEn?: string;
 }

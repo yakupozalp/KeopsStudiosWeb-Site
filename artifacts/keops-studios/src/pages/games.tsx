@@ -30,7 +30,7 @@ export default function Games() {
             <h2 className="text-sm font-mono text-primary tracking-[0.4em] mb-6 uppercase font-bold relative">
               {t("Katalog", "Catalog")}
             </h2>
-            <h3 className="text-5xl md:text-8xl font-display font-black uppercase tracking-tighter text-white relative">
+            <h3 className="text-5xl md:text-8xl font-display font-black uppercase tracking-tighter text-foreground relative">
               {t("Oyunlar", "Games")}
             </h3>
           </motion.div>
@@ -46,10 +46,10 @@ export default function Games() {
               <button className="px-6 py-2 rounded-full bg-primary/20 text-primary font-mono text-sm font-bold uppercase tracking-widest">
                 {t("Tümü", "All")}
               </button>
-              <button className="px-6 py-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-white/5 font-mono text-sm font-bold uppercase tracking-widest transition-colors">
+              <button className="px-6 py-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-foreground/5 font-mono text-sm font-bold uppercase tracking-widest transition-colors">
                 Mobile
               </button>
-              <button className="px-6 py-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-white/5 font-mono text-sm font-bold uppercase tracking-widest transition-colors">
+              <button className="px-6 py-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-foreground/5 font-mono text-sm font-bold uppercase tracking-widest transition-colors">
                 PC
               </button>
             </div>
@@ -77,7 +77,7 @@ export default function Games() {
           ) : (
             <div className="py-32 flex flex-col items-center justify-center text-center border border-border/30 bg-background/50 backdrop-blur-sm rounded-md shadow-2xl">
               <div className="css-pyramid scale-75 mb-10 opacity-50" />
-              <h4 className="text-2xl font-display font-black text-white mb-4 tracking-tight">
+              <h4 className="text-2xl font-display font-black text-foreground mb-4 tracking-tight">
                 {t("Yeni Dünyalar İnşa Ediliyor", "Building New Worlds")}
               </h4>
               <p className="text-muted-foreground font-mono uppercase tracking-widest max-w-md mx-auto">

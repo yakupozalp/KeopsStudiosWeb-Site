@@ -1,4 +1,4 @@
-import { pgTable, text, serial } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod/v4";
 
@@ -16,6 +16,13 @@ export const siteContentTable = pgTable("site_content", {
   youtubeUrl: text("youtube_url"),
   discordUrl: text("discord_url"),
   email: text("email").default("info@keops.studio"),
+  logoUrl: text("logo_url"),
+  faviconUrl: text("favicon_url"),
+  metaTitleTr: text("meta_title_tr"),
+  metaTitleEn: text("meta_title_en"),
+  metaDescriptionTr: text("meta_description_tr"),
+  metaDescriptionEn: text("meta_description_en"),
+  totalVisits: integer("total_visits").default(0),
 });
 
 export const insertSiteContentSchema = createInsertSchema(siteContentTable).omit({ id: true });
