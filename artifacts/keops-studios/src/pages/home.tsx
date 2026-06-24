@@ -6,7 +6,7 @@ import { TeamCard } from "@/components/team-card";
 import { Logo } from "@/components/ui/logo";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ChevronDown, Gamepad2, Users, Calendar, Monitor, Mail, Sparkles } from "lucide-react";
+import { ArrowRight, ChevronDown, Gamepad2, Users, Calendar, Monitor, Sparkles } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
@@ -346,42 +346,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════════ CTA ═══════════════ */}
-      <section className="py-32 relative overflow-hidden">
-        <div className="absolute inset-0"
-          style={{ background: "linear-gradient(135deg, hsl(258,90%,68%,0.12) 0%, hsl(318,85%,65%,0.08) 50%, hsl(187,100%,50%,0.12) 100%)" }} />
-        <div className="absolute inset-0 bg-grid-pattern opacity-20" />
-        <div className="absolute inset-0 animate-pulse"
-          style={{ background: "radial-gradient(ellipse at center, hsl(318,85%,65%,0.1) 0%, transparent 70%)", animationDuration: "4s" }} />
-
-        <div className="container mx-auto px-4 max-w-4xl relative z-10 text-center">
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }} transition={{ duration: 0.8 }}>
-            <p className="text-xs font-mono uppercase tracking-[0.4em] mb-6" style={{ color: "hsl(318,85%,65%)" }}>
-              {t("İletişim", "Contact")}
-            </p>
-            <h2 className="text-4xl md:text-6xl font-display font-black tracking-tighter mb-10 gradient-text-animated">
-              {t("Bir şeyler inşa etmeye hazır mısın?", "Ready to build something?")}
-            </h2>
-            {content?.email ? (
-              <a href={`mailto:${content.email}`}>
-                <Button size="lg" className="h-16 px-12 font-mono uppercase tracking-widest text-lg font-black transition-all duration-300 hover:scale-105 hover:brightness-110"
-                  style={{ background: "linear-gradient(135deg, hsl(258,90%,62%), hsl(318,85%,60%), hsl(187,100%,42%))", backgroundSize: "200%",
-                    boxShadow: "0 0 40px hsl(318,85%,65%,0.5), 0 8px 30px rgba(0,0,0,0.4)", color: "white" }}>
-                  <Mail className="mr-3 h-5 w-5" />
-                  {t("İletişime Geç", "Get in Touch")}
-                </Button>
-              </a>
-            ) : (
-              <Button size="lg" className="h-16 px-12 font-mono uppercase tracking-widest font-black"
-                style={{ background: "linear-gradient(135deg, hsl(258,90%,62%), hsl(318,85%,60%))", color: "white",
-                  boxShadow: "0 0 40px hsl(318,85%,65%,0.4)" }}>
-                {t("İletişime Geç", "Get in Touch")}
-              </Button>
-            )}
-          </motion.div>
-        </div>
-      </section>
     </PageTransition>
   );
 }
