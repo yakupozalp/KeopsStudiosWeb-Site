@@ -10,19 +10,15 @@ services:
     plan: free
     buildCommand: pnpm install --frozen-lockfile && pnpm run build
     startCommand: pnpm --filter @workspace/api-server start
-    disk:
-      name: keops-studios-data
-      mountPath: /var/data
-      sizeGB: 1
     envVars:
       - key: BASE_PATH
         value: /
       - key: NODE_ENV
         value: production
       - key: PRIVATE_OBJECT_DIR
-        value: /var/data/private
+        value: /tmp/keops-private
       - key: PUBLIC_OBJECT_SEARCH_PATHS
-        value: /var/data/public
+        value: /tmp/keops-public
       - key: DATABASE_URL
         fromDatabase:
           name: keops-studios-db
