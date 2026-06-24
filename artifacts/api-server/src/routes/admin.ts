@@ -4,7 +4,7 @@ import { sql } from "drizzle-orm";
 
 const router = Router();
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? "6534keops2022";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? "6536keops2022";
 
 const sessions = new Set<string>();
 
