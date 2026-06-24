@@ -6,7 +6,6 @@ import { ThemeProvider } from "@/lib/theme-provider";
 import { I18nProvider } from "@/lib/i18n-provider";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { IntroAnimation } from "@/components/intro-animation";
 import { useGetSiteContent } from "@workspace/api-client-react";
 import { useI18n } from "@/lib/i18n-provider";
 import { useEffect } from "react";
@@ -92,7 +91,6 @@ function App() {
         <I18nProvider defaultLanguage="tr" storageKey="keops-lang">
           <TooltipProvider>
             <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-              <IntroAnimation />
               <MetaUpdater />
               <Router />
             </WouterRouter>
