@@ -1,9 +1,15 @@
+import { useGetSiteContent } from "@workspace/api-client-react";
 import { useI18n } from "@/lib/i18n-provider";
 import { Link } from "wouter";
+import { Instagram, Twitter, Linkedin, Youtube, Mail } from "lucide-react";
+import { FaDiscord } from "react-icons/fa";
 import { Logo } from "@/components/ui/logo";
 
 export function Footer() {
+  const { data: content } = useGetSiteContent();
   const { t } = useI18n();
+
+  const hasSocials = content?.twitterUrl || content?.instagramUrl || content?.linkedinUrl || content?.youtubeUrl || content?.discordUrl || content?.email;
 
   return (
     <footer className="bg-card/50 border-t border-border/50 py-20 mt-auto">
@@ -16,6 +22,40 @@ export function Footer() {
             <p className="text-muted-foreground text-lg max-w-md">
               {t("Kalıcı izler bırakmak için inşa ediyoruz.", "Building to leave a lasting mark.")}
             </p>
+            {hasSocials && (
+              <div className="flex flex-wrap gap-3">
+                {content?.twitterUrl && (
+                  <a href={content.twitterUrl} target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-background border border-border hover:border-[#1DA1F2] hover:text-[#1DA1F2] transition-colors">
+                    <Twitter className="h-5 w-5" />
+                  </a>
+                )}
+                {content?.instagramUrl && (
+                  <a href={content.instagramUrl} target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-background border border-border hover:border-[#E1306C] hover:text-[#E1306C] transition-colors">
+                    <Instagram className="h-5 w-5" />
+                  </a>
+                )}
+                {content?.linkedinUrl && (
+                  <a href={content.linkedinUrl} target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-background border border-border hover:border-[#0077B5] hover:text-[#0077B5] transition-colors">
+                    <Linkedin className="h-5 w-5" />
+                  </a>
+                )}
+                {content?.youtubeUrl && (
+                  <a href={content.youtubeUrl} target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-background border border-border hover:border-[#FF0000] hover:text-[#FF0000] transition-colors">
+                    <Youtube className="h-5 w-5" />
+                  </a>
+                )}
+                {content?.discordUrl && (
+                  <a href={content.discordUrl} target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-background border border-border hover:border-[#5865F2] hover:text-[#5865F2] transition-colors">
+                    <FaDiscord className="h-5 w-5" />
+                  </a>
+                )}
+                {content?.email && (
+                  <a href={`mailto:${content.email}`} className="p-3 rounded-full bg-background border border-border hover:border-primary hover:text-primary transition-colors">
+                    <Mail className="h-5 w-5" />
+                  </a>
+                )}
+              </div>
+            )}
           </div>
 
           <div className="col-span-1 md:col-span-3 lg:col-span-2">
