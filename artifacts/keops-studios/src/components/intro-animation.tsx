@@ -36,24 +36,19 @@ export function IntroAnimation() {
         initial={{ opacity: 1 }}
         animate={{ opacity: fadeOut ? 0 : 1 }}
         transition={{ duration: 0.8 }}
-        className="fixed inset-0 z-[9999] bg-black flex items-center justify-center"
-        onClick={handleEnd}
+        className="fixed inset-0 z-[9999] bg-white flex items-center justify-center"
       >
-        <video
-          ref={videoRef}
-          src="/intro.mp4"
-          muted
-          playsInline
-          onEnded={handleEnd}
-          onError={handleEnd}
-          className="w-full h-full object-cover"
-        />
-        <button
-          onClick={handleEnd}
-          className="absolute bottom-8 right-8 font-mono text-xs uppercase tracking-widest text-white/50 hover:text-white/80 transition-colors"
-        >
-          Geç →
-        </button>
+        <div className="relative w-80 h-80 rounded-2xl overflow-hidden shadow-2xl">
+          <video
+            ref={videoRef}
+            src="/intro.mp4"
+            muted
+            playsInline
+            onEnded={handleEnd}
+            onError={handleEnd}
+            className="w-full h-full object-cover"
+          />
+        </div>
       </motion.div>
     </AnimatePresence>
   );
