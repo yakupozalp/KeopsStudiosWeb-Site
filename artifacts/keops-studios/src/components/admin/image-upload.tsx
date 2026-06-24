@@ -46,7 +46,10 @@ export function ImageUpload({ value, onChange, label = "Görsel Yükle", classNa
 
       if (!uploadRes.ok) throw new Error("Yükleme başarısız");
 
-      onChange(`/api/storage/objects${objectPath}`);
+      // objectPath is like "/objects/uploads/uuid"
+      // The serve route already prepends "/objects/", so strip it here
+      const servePath = objectPath.replace(/^\/objects/, "");
+      onChange(`/api/storage/objects${servePath}`);
     } catch (err) {
       setError("Yükleme başarısız oldu. Tekrar deneyin.");
     } finally {
