@@ -8,6 +8,7 @@
 
 export * from './adminCredentials';
 export * from './adminSession';
+export * from './errorEnvelope';
 export * from './game';
 export * from './gameInput';
 export * from './gameUpdate';
@@ -18,3 +19,5 @@ export * from './studioStats';
 export * from './teamMember';
 export * from './teamMemberInput';
 export * from './teamMemberUpdate';
+export * from './uploadUrlRequest';
+export * from './uploadUrlResponse';

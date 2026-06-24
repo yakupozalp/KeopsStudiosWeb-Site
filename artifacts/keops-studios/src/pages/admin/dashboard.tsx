@@ -19,6 +19,7 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { PageTransition } from "@/components/layout/page-transition";
+import { ImageUpload } from "@/components/admin/image-upload";
 import { Logo } from "@/components/ui/logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -248,9 +249,12 @@ function GamesManager() {
                 <div className="space-y-2"><Label>Platform</Label><Input value={formData.platform} onChange={e => setFormData({ ...formData, platform: e.target.value })} required placeholder="PC, Mobile" /></div>
                 <div className="space-y-2"><Label>Tür</Label><Input value={formData.genre} onChange={e => setFormData({ ...formData, genre: e.target.value })} /></div>
                 <div className="space-y-2"><Label>Durum</Label><Input value={formData.status} onChange={e => setFormData({ ...formData, status: e.target.value })} required /></div>
-                <div className="space-y-2"><Label>Görsel URL</Label><Input value={formData.imageUrl} onChange={e => setFormData({ ...formData, imageUrl: e.target.value })} /></div>
                 <div className="space-y-2"><Label>Sıra</Label><Input type="number" value={formData.order} onChange={e => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })} /></div>
                 <div className="col-span-2 space-y-2"><Label>Mağaza URL</Label><Input value={formData.storeUrl} onChange={e => setFormData({ ...formData, storeUrl: e.target.value })} /></div>
+              </div>
+              <div className="space-y-2">
+                <Label>Oyun Görseli</Label>
+                <ImageUpload value={formData.imageUrl} onChange={url => setFormData({ ...formData, imageUrl: url })} label="Oyun Görseli Yükle" />
               </div>
               <div className="space-y-2"><Label>Açıklama</Label><Textarea value={formData.description} onChange={e => setFormData({ ...formData, description: e.target.value })} rows={3} /></div>
               <Button type="submit" className="w-full font-mono tracking-widest uppercase" disabled={createGame.isPending || updateGame.isPending}>Kaydet</Button>
@@ -331,10 +335,13 @@ function TeamManager() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2"><Label>İsim</Label><Input value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} required /></div>
                 <div className="space-y-2"><Label>Sıra</Label><Input type="number" value={formData.order} onChange={e => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })} required /></div>
-                <div className="space-y-2"><Label>Görsel URL</Label><Input value={formData.imageUrl} onChange={e => setFormData({ ...formData, imageUrl: e.target.value })} /></div>
                 <div className="space-y-2"><Label>Varsayılan Rol</Label><Input value={formData.role} onChange={e => setFormData({ ...formData, role: e.target.value })} required placeholder="Developer" /></div>
                 <div className="space-y-2"><Label>LinkedIn</Label><Input value={formData.linkedinUrl} onChange={e => setFormData({ ...formData, linkedinUrl: e.target.value })} /></div>
                 <div className="space-y-2"><Label>Twitter</Label><Input value={formData.twitterUrl} onChange={e => setFormData({ ...formData, twitterUrl: e.target.value })} /></div>
+              </div>
+              <div className="space-y-2">
+                <Label>Profil Fotoğrafı</Label>
+                <ImageUpload value={formData.imageUrl} onChange={url => setFormData({ ...formData, imageUrl: url })} label="Fotoğraf Yükle" />
               </div>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 border border-border/50 p-4 rounded-md bg-muted/20">
                 <div className="space-y-4">
@@ -487,24 +494,13 @@ function SeoManager() {
         <h3 className="font-display font-bold uppercase tracking-widest text-lg border-b border-border pb-4">🖼️ Logo & Favicon</h3>
         <p className="text-sm text-muted-foreground font-mono">Logo URL girmezseniz varsayılan Keops logosu kullanılır.</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-3">
-            <Label>Logo URL</Label>
-            <Input value={formData.logoUrl} onChange={e => setFormData({ ...formData, logoUrl: e.target.value })} placeholder="https://..." />
-            {formData.logoUrl && (
-              <div className="p-4 border border-border rounded-md bg-muted/30 flex items-center justify-center">
-                <img src={formData.logoUrl} alt="Logo preview" className="h-16 object-contain" onError={e => (e.currentTarget.style.display = "none")} />
-              </div>
-            )}
+          <div className="space-y-2">
+            <Label>Logo</Label>
+            <ImageUpload value={formData.logoUrl} onChange={url => setFormData({ ...formData, logoUrl: url })} label="Logo Yükle" />
           </div>
-          <div className="space-y-3">
-            <Label>Favicon URL</Label>
-            <Input value={formData.faviconUrl} onChange={e => setFormData({ ...formData, faviconUrl: e.target.value })} placeholder="https://... (.ico veya .png)" />
-            {formData.faviconUrl && (
-              <div className="p-4 border border-border rounded-md bg-muted/30 flex items-center gap-3">
-                <img src={formData.faviconUrl} alt="Favicon preview" className="h-8 w-8 object-contain" onError={e => (e.currentTarget.style.display = "none")} />
-                <span className="text-xs text-muted-foreground font-mono">Favicon önizleme</span>
-              </div>
-            )}
+          <div className="space-y-2">
+            <Label>Favicon (.ico veya .png)</Label>
+            <ImageUpload value={formData.faviconUrl} onChange={url => setFormData({ ...formData, faviconUrl: url })} label="Favicon Yükle" />
           </div>
         </div>
       </div>
