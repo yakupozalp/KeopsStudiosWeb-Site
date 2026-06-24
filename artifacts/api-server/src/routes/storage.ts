@@ -27,8 +27,9 @@ router.post("/storage/uploads/request-url", async (req: Request, res: Response) 
   try {
     const { name, size, contentType } = parsed.data;
 
-    const uploadURL = await objectStorageService.getObjectEntityUploadURL();
-    const objectPath = objectStorageService.normalizeObjectEntityPath(uploadURL);
+    const baseUrl = `${req.protocol}://${req.get("host")}`;
+    const { objectId, uploadURL } = objectStorageService.getObjectEntityUploadURL(baseUrl);
+    const objectPath = objectStorageService.getObjectEntityObjectPath(objectId);
 
     res.json(
       RequestUploadUrlResponse.parse({
@@ -40,6 +41,36 @@ router.post("/storage/uploads/request-url", async (req: Request, res: Response) 
   } catch (error) {
     req.log.error({ err: error }, "Error generating upload URL");
     res.status(500).json({ error: "Failed to generate upload URL" });
+  }
+});
+
+/**
+ * PUT /storage/uploads/:objectId
+ *
+ * Store the uploaded file on the local filesystem backing store.
+ */
+router.put("/storage/uploads/:objectId", async (req: Request, res: Response) => {
+  try {
+    const objectId = req.params.objectId;
+    if (!objectId) {
+      res.status(400).json({ error: "Missing object id" });
+      return;
+    }
+
+    const chunks: Array<Buffer> = [];
+    for await (const chunk of req) {
+      chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
+    }
+
+    await objectStorageService.writeObjectEntity(objectId, {
+      content: Buffer.concat(chunks),
+      contentType: req.header("content-type") ?? undefined,
+    });
+
+    res.status(204).end();
+  } catch (error) {
+    req.log.error({ err: error }, "Error uploading object");
+    res.status(500).json({ error: "Failed to upload object" });
   }
 });
 
