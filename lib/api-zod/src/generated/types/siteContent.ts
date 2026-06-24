@@ -35,6 +35,10 @@ export interface SiteContent {
   /** @nullable */
   logoUrl?: string | null;
   /** @nullable */
+  logoDarkUrl?: string | null;
+  /** @nullable */
+  logoLightUrl?: string | null;
+  /** @nullable */
   faviconUrl?: string | null;
   /** @nullable */
   metaTitleTr?: string | null;

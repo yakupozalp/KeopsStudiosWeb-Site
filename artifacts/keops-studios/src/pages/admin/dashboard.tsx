@@ -462,7 +462,7 @@ function SeoManager() {
   const queryClient = useQueryClient();
 
   const [formData, setFormData] = useState({
-    logoUrl: "", faviconUrl: "",
+    logoUrl: "", logoDarkUrl: "", logoLightUrl: "", faviconUrl: "",
     metaTitleTr: "", metaTitleEn: "",
     metaDescriptionTr: "", metaDescriptionEn: "",
   });
@@ -471,6 +471,8 @@ function SeoManager() {
     if (content) {
       setFormData({
         logoUrl: content.logoUrl || "",
+        logoDarkUrl: content.logoDarkUrl || "",
+        logoLightUrl: content.logoLightUrl || "",
         faviconUrl: content.faviconUrl || "",
         metaTitleTr: content.metaTitleTr || "",
         metaTitleEn: content.metaTitleEn || "",
@@ -492,15 +494,76 @@ function SeoManager() {
       {/* Logo & Favicon */}
       <div className="border border-border p-6 bg-card space-y-6">
         <h3 className="font-display font-bold uppercase tracking-widest text-lg border-b border-border pb-4">🖼️ Logo & Favicon</h3>
-        <p className="text-sm text-muted-foreground font-mono">Logo URL girmezseniz varsayılan Keops logosu kullanılır.</p>
+        <p className="text-xs text-muted-foreground font-mono">Logo yüklemezseniz varsayılan Keops logosu kullanılır.</p>
+
+        {/* Dark & Light logos side by side */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-2">
-            <Label>Logo</Label>
-            <ImageUpload value={formData.logoUrl} onChange={url => setFormData({ ...formData, logoUrl: url })} label="Logo Yükle" />
+          {/* Dark mode logo */}
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full bg-zinc-900 border border-border inline-block" />
+              <Label>Karanlık Tema Logosu</Label>
+            </div>
+            <p className="text-xs text-muted-foreground font-mono">Koyu arka planda görünecek logo (genellikle beyaz/açık renkli)</p>
+            <ImageUpload
+              value={formData.logoDarkUrl}
+              onChange={url => setFormData({ ...formData, logoDarkUrl: url })}
+              label="Karanlık Logo Yükle"
+            />
+            {/* Preview on dark background */}
+            <div className="rounded-md p-4 flex items-center justify-center border border-border" style={{ background: "#0f0f14", minHeight: 80 }}>
+              {formData.logoDarkUrl ? (
+                <img src={formData.logoDarkUrl} alt="Karanlık tema logo" className="h-10 object-contain" onError={e => { e.currentTarget.style.display = "none"; }} />
+              ) : (
+                <img src="/logo-dark-mode.png" alt="Varsayılan karanlık logo" className="h-10 object-contain opacity-60" />
+              )}
+            </div>
+            <p className="text-xs text-center text-muted-foreground font-mono">— Karanlık tema önizleme —</p>
           </div>
-          <div className="space-y-2">
-            <Label>Favicon (.ico veya .png)</Label>
-            <ImageUpload value={formData.faviconUrl} onChange={url => setFormData({ ...formData, faviconUrl: url })} label="Favicon Yükle" />
+
+          {/* Light mode logo */}
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full bg-white border border-border inline-block" />
+              <Label>Açık Tema Logosu</Label>
+            </div>
+            <p className="text-xs text-muted-foreground font-mono">Beyaz arka planda görünecek logo (genellikle siyah/koyu renkli)</p>
+            <ImageUpload
+              value={formData.logoLightUrl}
+              onChange={url => setFormData({ ...formData, logoLightUrl: url })}
+              label="Açık Logo Yükle"
+            />
+            {/* Preview on light background */}
+            <div className="rounded-md p-4 flex items-center justify-center border border-border" style={{ background: "#ffffff", minHeight: 80 }}>
+              {formData.logoLightUrl ? (
+                <img src={formData.logoLightUrl} alt="Açık tema logo" className="h-10 object-contain" onError={e => { e.currentTarget.style.display = "none"; }} />
+              ) : (
+                <img src="/logo-light-mode.png" alt="Varsayılan açık logo" className="h-10 object-contain opacity-60" />
+              )}
+            </div>
+            <p className="text-xs text-center text-muted-foreground font-mono">— Açık tema önizleme —</p>
+          </div>
+        </div>
+
+        {/* Favicon */}
+        <div className="border-t border-border pt-6 space-y-3">
+          <Label>Favicon (.ico veya .png)</Label>
+          <p className="text-xs text-muted-foreground font-mono">Tarayıcı sekmesindeki küçük ikon</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+            <ImageUpload
+              value={formData.faviconUrl}
+              onChange={url => setFormData({ ...formData, faviconUrl: url })}
+              label="Favicon Yükle"
+            />
+            {formData.faviconUrl && (
+              <div className="flex items-center gap-3 p-4 border border-border rounded-md bg-muted/30">
+                <div className="flex items-center gap-1.5 bg-zinc-200 dark:bg-zinc-700 px-3 py-1.5 rounded text-xs font-mono">
+                  <img src={formData.faviconUrl} alt="favicon" className="h-4 w-4 object-contain" onError={e => { e.currentTarget.style.display = "none"; }} />
+                  keops.studio
+                </div>
+                <span className="text-xs text-muted-foreground">Sekme önizleme</span>
+              </div>
+            )}
           </div>
         </div>
       </div>

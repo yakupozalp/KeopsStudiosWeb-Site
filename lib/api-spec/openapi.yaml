@@ -519,6 +519,10 @@ components:
           type: ["string", "null"]
         logoUrl:
           type: ["string", "null"]
+        logoDarkUrl:
+          type: ["string", "null"]
+        logoLightUrl:
+          type: ["string", "null"]
         faviconUrl:
           type: ["string", "null"]
         metaTitleTr:
@@ -560,6 +564,10 @@ components:
         email:
           type: string
         logoUrl:
+          type: string
+        logoDarkUrl:
+          type: string
+        logoLightUrl:
           type: string
         faviconUrl:
           type: string

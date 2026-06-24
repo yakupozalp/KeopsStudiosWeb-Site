@@ -20,6 +20,8 @@ export interface SiteContentUpdate {
   discordUrl?: string;
   email?: string;
   logoUrl?: string;
+  logoDarkUrl?: string;
+  logoLightUrl?: string;
   faviconUrl?: string;
   metaTitleTr?: string;
   metaTitleEn?: string;

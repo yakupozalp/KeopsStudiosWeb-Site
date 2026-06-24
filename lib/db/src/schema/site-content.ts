@@ -17,6 +17,8 @@ export const siteContentTable = pgTable("site_content", {
   discordUrl: text("discord_url"),
   email: text("email").default("info@keops.studio"),
   logoUrl: text("logo_url"),
+  logoDarkUrl: text("logo_dark_url"),
+  logoLightUrl: text("logo_light_url"),
   faviconUrl: text("favicon_url"),
   metaTitleTr: text("meta_title_tr"),
   metaTitleEn: text("meta_title_en"),

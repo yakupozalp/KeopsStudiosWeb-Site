@@ -130,6 +130,10 @@ export interface SiteContent {
   /** @nullable */
   logoUrl?: string | null;
   /** @nullable */
+  logoDarkUrl?: string | null;
+  /** @nullable */
+  logoLightUrl?: string | null;
+  /** @nullable */
   faviconUrl?: string | null;
   /** @nullable */
   metaTitleTr?: string | null;
@@ -157,6 +161,8 @@ export interface SiteContentUpdate {
   discordUrl?: string;
   email?: string;
   logoUrl?: string;
+  logoDarkUrl?: string;
+  logoLightUrl?: string;
   faviconUrl?: string;
   metaTitleTr?: string;
   metaTitleEn?: string;
